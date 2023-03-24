@@ -50,4 +50,12 @@ public class Attrezzo {
 		return this.getNome()+" ("+this.getPeso()+"kg)";
 	}
 
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public void setPeso(int peso) {
+		this.peso = peso;
+	}
+
 }
