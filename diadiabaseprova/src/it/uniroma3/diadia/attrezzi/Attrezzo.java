@@ -1,4 +1,4 @@
-
+package it.uniroma3.diadia.attrezzi;
 
 
 /**
@@ -48,14 +48,6 @@ public class Attrezzo {
 	 */
 	public String toString() {
 		return this.getNome()+" ("+this.getPeso()+"kg)";
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public void setPeso(int peso) {
-		this.peso = peso;
 	}
 
 }
