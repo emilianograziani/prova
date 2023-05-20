@@ -2,6 +2,14 @@ package it.uniroma3.diadia.ambienti;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
+/**
+ * Variante della classe Stanza con i campi protected
+ * 
+ * @author EFFE
+ * @see Stanza
+ * @see Attrezzo
+ * @version homework2
+ */
 public class StanzaProtected {
 	
 	static final protected int NUMERO_MASSIMO_DIREZIONI = 4;

@@ -1,8 +1,7 @@
 package it.uniroma3.diadia;
-import it.uniroma3.diadia.ambienti.*;
-import it.uniroma3.diadia.attrezzi.*;
-import it.uniroma3.diadia.comandi.Comando;
-import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
+import it.uniroma3.diadia.ambienti.Labirinto;
+import it.uniroma3.diadia.comandi.AbstractComando;
+import it.uniroma3.diadia.comandi.FabbricaDiComandiRiflessiva;
 
 /**
  * Classe principale di diadia, un semplice gioco di ruolo ambientato al dia.
@@ -31,12 +30,12 @@ public class DiaDia {
 	private Partita partita;
 	private IO IO; //tipo astratto IO
 
-	public DiaDia(IO io) {//passo parametro io di tipo astratto IO (vedi slide 8 hmwk2)
-		this.partita = new Partita();
-		this.IO = io;
+	public DiaDia(IO console, Labirinto labirinto) {
+		this.IO = console;
+		this.partita = new Partita(labirinto);
 	}
 
-	public void gioca() {
+	public void gioca() throws Exception {
 		String istruzione;
 
 		IO.mostraMessaggio(MESSAGGIO_BENVENUTO);
@@ -50,11 +49,12 @@ public class DiaDia {
 	 * Processa una istruzione 
 	 *
 	 * @return true se l'istruzione e' eseguita e il gioco continua, false altrimenti
+	 * @throws Exception 
 	 */
-	private boolean processaIstruzione(String istruzione) {
-		Comando comandoDaEseguire;
-		FabbricaDiComandiFisarmonica factory = new FabbricaDiComandiFisarmonica();
-		
+	private boolean processaIstruzione(String istruzione) throws Exception{
+		AbstractComando comandoDaEseguire;
+		FabbricaDiComandiRiflessiva factory = new FabbricaDiComandiRiflessiva();
+
 		comandoDaEseguire = factory.costruisciComando(istruzione);
 		comandoDaEseguire.esegui(this.partita);
 		
@@ -66,9 +66,10 @@ public class DiaDia {
 		}
 	
 	
-	public static void main(String[] argc) {
+	public static void main(String[] argc) throws Exception {
 		IO io = new IOConsole();
-		DiaDia gioco = new DiaDia(io);
+		Labirinto labirinto = new Labirinto().LabirintoDiaDia();
+		DiaDia gioco = new DiaDia(io, labirinto);
 		gioco.gioca();
 	}
 
